@@ -4,33 +4,31 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.github.toquery.moneypro.entity.MoneyPro;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
+import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class MoneyProApplicationTests {
+/**
+ * @author toquery
+ * @version 1
+ */
+@Component
+public class MoneyProDataLoader {
 
-    @Test
-    public void contextLoads() {
+    public List<MoneyPro> csvLoader() {
         CsvMapper csvMapper = new CsvMapper();
-
         CsvSchema schema = csvMapper
                 .schemaFor(MoneyPro.class) //设置 schema pojo对象
                 .withHeader() // 取第一行
                 .withColumnSeparator(',');
         try (InputStream inputStream = new ClassPathResource("csv/12.csv").getInputStream();) {
             MappingIterator<MoneyPro> values = csvMapper.readerFor(MoneyPro.class).with(schema).readValues(inputStream);
-            values.forEachRemaining(System.out::println);
+            return values.readAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
-
 }
-

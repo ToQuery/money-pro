@@ -28,10 +28,7 @@ public class ChineseCurrencyJsonDeserializer extends JsonDeserializer<Double> {
                 .replaceAll("\\)", "")
                 .substring(CURRENCY_SYMBOL.length());
         Double result = Double.valueOf(rawValue);
-        if (negative) {
-            result = -result;
-        }
-        return result;
+        return negative ? -result : result;
 
     }
 }

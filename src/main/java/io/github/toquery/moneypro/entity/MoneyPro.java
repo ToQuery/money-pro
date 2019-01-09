@@ -12,15 +12,13 @@ import lombok.ToString;
 import java.util.Date;
 
 /**
- * 日期,款额,账户,总额,转账到,结余,类别,说明,交易类型,代理人
- *
  * @author toquery
  * @version 1
  */
 @Getter
 @Setter
 @ToString
-@JsonPropertyOrder(value = {"日期", "款额", "账户", "总额", "转账到", "结余", "类别", "说明", "交易类型", "代理人"},alphabetic = true)
+@JsonPropertyOrder(value = {"日期", "款额", "账户", "总额", "转账到", "结余", "类别", "说明", "交易类型", "代理人"}, alphabetic = true)
 public class MoneyPro {
 
     @JsonProperty("日期")

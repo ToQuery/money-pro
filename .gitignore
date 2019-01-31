@@ -23,6 +23,7 @@
 hs_err_pid*
 
 # node
+node
 node_modules
 dist
 package-lock.json
